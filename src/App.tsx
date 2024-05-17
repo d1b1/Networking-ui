@@ -23,10 +23,29 @@ import {
 import type { Hit } from 'instantsearch.js';
 import './App.css';
 
-const searchClient = algoliasearch(
-  'UD1VE6KV0J',
-  '81bcf3723376714307c21454b8515549'
-);
+// const searchClient = algoliasearch(
+//   'UD1VE6KV0J',
+//   '81bcf3723376714307c21454b8515549'
+// );
+
+const searchClient = {
+  search(requests) {
+    console.log('asdfasdf')
+    return fetch('https://us-central1-networking-9a9e0.cloudfunctions.net/api/search', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ requests }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      return {
+        results: data.results,
+      };
+    });
+  },
+};
 
 function toTitleCase(str) {
   return str.replace(
