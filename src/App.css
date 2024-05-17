@@ -262,3 +262,11 @@ h4 {
 .ais-ClearRefinements { 
   max-width: 150px;
 }
+
+.right-panel {
+  width: 100%;
+  border: 1px solid #DFDFDF;
+  border-radius: 4px;
+  padding: 10px;
+  height: 90%;
+}

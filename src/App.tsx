@@ -14,7 +14,6 @@ import {
   SearchBox,
   RefinementList,
   CurrentRefinements,
-  ClearRefinements,
   Stats,
   SortBy
 } from 'react-instantsearch';
@@ -39,12 +38,12 @@ const searchClient = {
       },
       body: JSON.stringify({ requests }),
     })
-    .then(response => response.json())
-    .then(data => {
-      return {
-        results: data.results,
-      };
-    });
+      .then(response => response.json())
+      .then(data => {
+        return {
+          results: data.results,
+        };
+      });
   },
   searchForFacetValues(requests) {
     return fetch(`${apiUrl}/sffv`, {
@@ -151,7 +150,7 @@ export function App() {
               </div>
               <div className="filter-el">
                 <h4>
-                  Location?
+                  Location?k
                 </h4>
                 <RefinementList searchable="true" searchablePlaceholder="Enter a location..." attribute="Location" />
               </div>
@@ -172,6 +171,35 @@ export function App() {
               <br />
               <Pagination padding={2} />
               <br />
+            </div>
+            <div className="col-md-5 d-none">
+              <div className="right-panel text-center">
+                
+                <a href="https://www.linkedin.com/in/dr-craig-n-horning-ph-d-41735410/" target="_blank">
+                  <img src="https://media.licdn.com/dms/image/C4D03AQHzjOieBG0a-w/profile-displayphoto-shrink_800_800/0/1618580779268?e=1721260800&amp;v=beta&amp;t=YsfM-VcNIWL3NyiK7CFMq-suONaOJlyHZHbdcbJ0iLA" width="300px;" className=" img-thumbnail" />
+                </a>
+
+                <h3>
+                  Ron Deman
+                </h3>
+                <p>
+                  CEO & Co-Founder
+                </p>
+                <p>
+                  New Startup LLC
+                </p>
+                <p>
+                  Business Development Manager at Vention | Startup Partnerships | Venture 
+                  Scout | Helping Founders Engineer Products and Sell Them
+                </p>
+                <textarea className="form-control">
+                  Enter a summary...
+                </textarea>
+                <br/>
+                <textarea className="form-control">
+                  Tags
+                </textarea>
+              </div>
             </div>
           </div>
         </div>
