@@ -28,10 +28,11 @@ import './App.css';
 //   '81bcf3723376714307c21454b8515549'
 // );
 
+const apiUrl = 'https://us-central1-networking-9a9e0.cloudfunctions.net/api';
+
 const searchClient = {
   search(requests) {
-    console.log('asdfasdf')
-    return fetch('https://us-central1-networking-9a9e0.cloudfunctions.net/api/search', {
+    return fetch(`${apiUrl}/search`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -45,6 +46,15 @@ const searchClient = {
       };
     });
   },
+  searchForFacetValues(requests) {
+    return fetch(`${apiUrl}/sffv`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ requests }),
+    }).then(res => res.json());
+  }
 };
 
 function toTitleCase(str) {
@@ -95,14 +105,12 @@ export function App() {
 
   return (
     <div>
-
       <InstantSearch
         searchClient={searchClient}
         indexName="Networking-Book"
         future={future}
         routing={true}
       >
-
         <header className="header">
           <h1 className="header-title">
             Networking Tools
@@ -128,7 +136,6 @@ export function App() {
           <Configure hitsPerPage={25} />
           <div className="row">
             <div className="col-3 d-none d-md-block d-lg-block">
-
               <SortBy
                 items={[
                   { value: 'Networking-Book', label: 'Newest to Oldest' },
@@ -136,8 +143,6 @@ export function App() {
                 ]}
               />
               <br />
-
-              
               <div className="filter-el">
                 <h4>
                   Tag-em
@@ -151,16 +156,11 @@ export function App() {
                 <RefinementList searchable="true" searchablePlaceholder="Enter a location..." attribute="Location" />
               </div>
             </div>
-            <div className="col-md-9 p-4">
+            <div className="col-md-9">
               <div className="row">
-                <div className="col-9">
-                  <SearchBox placeholder="Enter a name..." className="searchbox" />
-
-                  <CurrentRefinements title="My custom title" />
-
-                  <br/>
-                  {/* <ClearRefinements /> */}
-                  
+                <div className="col-12">
+                  <SearchBox placeholder="What do you want to know..." className="searchbox" />
+                  <CurrentRefinements />
                 </div>
                 <div className="col-3">
                   {/* <button className="btn btn-outline-dark" onClick={openExportModal}>
@@ -171,6 +171,7 @@ export function App() {
               <Hits hitComponent={Hit} />
               <br />
               <Pagination padding={2} />
+              <br />
             </div>
           </div>
         </div>
@@ -213,8 +214,8 @@ function Hit({ hit }: HitProps) {
     <article>
       <div className="row">
         <div className="col-4">
-          <a href={`${hit['LinkedIn']}`} target="_blank">
-            <ImageWithFallback hit={hit} width="80" className="compLogo" alt={hit.name} />
+          <a href={`${hit['Linkedin']}`} target="_blank">
+            <ImageWithFallback hit={hit} width="100" className="compLogo" alt={hit.name} />
           </a>
           <h4>
             <Highlight attribute="FirstName" hit={hit} /> <Highlight attribute="LastName" hit={hit} />

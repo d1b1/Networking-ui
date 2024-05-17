@@ -18,11 +18,11 @@ app.get("/", (req, res) => {
 });
 
 app.post("/sffv", async ({body}, res) => {
-  console.log("Call to the facet search");
-
   const {requests} = body;
   const results = await algoliaClient.searchForFacetValues(requests);
   res.status(200).send(results);
+
+  console.log("Call to the facet search");
 });
 
 // Define another route if needed

@@ -119,12 +119,16 @@ em {
 }
 
 .searchbox {
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .pagination {
   margin: 2rem auto;
   text-align: center;
+}
+
+.ais-SortBy-select {
+  font-size: 14px;
 }
 
 .ais-Hits-item { 
@@ -236,4 +240,25 @@ h4 {
 
 .avatar-border {
   border-radius: 10px;
+}
+
+.ais-CurrentRefinements-delete {
+  margin-top: 2px;
+}
+
+.ais-CurrentRefinements-item {
+  border-radius: 4px;
+  padding: 6px;
+}
+
+.ais-CurrentRefinements-label {
+  font-weight: bold;
+}
+
+.ais-CurrentRefinements-list {
+  margin-bottom: 10px;
+}
+
+.ais-ClearRefinements { 
+  max-width: 150px;
 }
