@@ -14,6 +14,7 @@ import {
   SearchBox,
   RefinementList,
   CurrentRefinements,
+  HierarchicalMenu,
   Stats,
   SortBy
 } from 'react-instantsearch';
@@ -21,11 +22,6 @@ import {
 
 import type { Hit } from 'instantsearch.js';
 import './App.css';
-
-// const searchClient = algoliasearch(
-//   'UD1VE6KV0J',
-//   '81bcf3723376714307c21454b8515549'
-// );
 
 const apiUrl = 'https://us-central1-networking-9a9e0.cloudfunctions.net/api';
 
@@ -142,18 +138,32 @@ export function App() {
                 ]}
               />
               <br />
+
+              <div className="filter-el">
+                <h4>
+                  Locations
+                </h4>
+                <HierarchicalMenu
+                  separator=" > "
+                  sortBy={['isRefined', 'count:desc']}
+                  searchable="true" 
+                  searchablePlaceholder="Enter a location..." 
+                  attributes={[ 'Locations.lvl1', 'Locations.lvl2', 'Locations.lvl3'  ]}
+                />
+              </div>
+
               <div className="filter-el">
                 <h4>
                   Tag-em
                 </h4>
                 <RefinementList attribute="Tags" searchable="true" searchablePlaceholder="Enter a tag..." limit="100" />
               </div>
-              <div className="filter-el">
+              {/* <div className="filter-el">
                 <h4>
-                  Location?k
+                  Location?
                 </h4>
-                <RefinementList searchable="true" searchablePlaceholder="Enter a location..." attribute="Location" />
-              </div>
+                <RefinementList searchable="true" searchablePlaceholder="Enter a location..." attribute="Location" limit="50" />
+              </div> */}
             </div>
             <div className="col-md-9">
               <div className="row">
